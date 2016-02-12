@@ -1,0 +1,137 @@
+#include <iostream>
+#include <fstream>
+#include <time.h>
+#include <ctime>
+
+using namespace std;
+
+const int dimX1 = 2;
+const int dimX2 = 2;
+
+const int dimY1 = 2;
+const int dimY2 = 2;
+
+int main() {
+
+	clock_t start;
+	double duration;
+
+	cout << "Please enter the dimensions of the matrix: X & Y respectively.\n";
+//	cin >> dimX1;
+//	cin >> dimY1;
+
+	cout << "\nNow enter the dimensions of the 2nd matrix: X & Y respectively.\n";
+//	cin >> dimX2;
+//	cin >> dimY2;
+
+	const int x1 = const_cast<const int&>(dimX1);
+
+	int mat1[dimX1][dimY1];
+	int mat2[dimX2][dimY2];
+
+	srand(time(NULL));
+	
+	for (int i = 0; i < dimX1; i++) {
+		for (int j = 0; j < dimY1; j++) {
+			mat1[i][j] = rand() % 10 + 1;
+		}
+	}
+	for (int i = 0; i < dimX2; i++) {
+		for (int j = 0; j < dimY2; j++) {
+			mat2[i][j] = rand() % 10 + 1;
+		}
+	}
+
+	cout << "\nThe randomly Generated Matrix 1 is: " << endl;
+	for (int i = 0; i < dimX1; i++) {
+		for (int j = 0; j < dimY1; j++) {
+			cout << mat1[i][j] << " ";
+		}
+		cout << endl;
+	}
+	cout << "\nThe randomly Generated Matrix 2 is: " << endl;
+	for (int i = 0; i < dimX1; i++) {
+		for (int j = 0; j < dimY1; j++) {
+			cout << mat2[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	int mat3[dimX1][dimY2];
+	int mat4[dimX1][dimY2];
+
+	start = clock();
+	int m1a = mat1[0][0] + mat1[1][1];
+	int m1b = mat2[0][0] + mat2[1][1];
+	int m1 = m1a * m1b;
+	int m2 = (mat1[1][0] + mat1[1][1]) * mat2[0][0];
+	int m3 = mat1[0][0] * (mat2[0][1] - mat2[1][1]);
+	int m4 = mat1[1][1] * (mat2[1][0] - mat2[0][0]);
+	int m5 = (mat1[0][0] + mat1[0][1]) * mat2[1][1];
+	int m6a = mat1[1][0] + mat1[0][0];
+	int m6b = mat2[0][0] + mat2[0][1];
+	int m6 = m6a * m6b;
+	int m7a = mat1[0][1] + mat1[1][1];
+	int m7b = mat2[1][0] + mat2[1][1];
+	int m7 = m7a * m7b;
+
+	mat3[0][0] = m1 + m4 - m5 + m7;
+	mat3[0][1] = m3 + m5;
+	mat3[1][0] = m2 + m4;
+	mat3[1][1] = m1 - m2 + m3 + m6;
+	duration = (clock() - start) / (double)CLOCKS_PER_SEC;
+
+	cout << "\n\n\n______________________________________________________________" << endl;
+	cout << "\nThe RESULTANT Matrix is: " << endl;
+	cout << "______________________________________________________________" << endl;
+	for (int i = 0; i < dimX1; i++) {
+		for (int j = 0; j < dimY1; j++) {
+			cout << mat3[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	cout << "\nTime of Strassens: " << duration << "sec." <<endl;
+
+
+	cout << "\n\n\n______________________________________________________________" << endl;
+	cout << "\nNow starting iterative method:  " << endl;
+	cout << "______________________________________________________________" << endl;
+	cout << "\nThe RESULTANT Matrix is: " << endl;
+	cout << "______________________________________________________________" << endl;
+
+	start = clock();
+	for (int i = 0; i < dimX1; i++)	{
+		for (int j = 0; j < dimY2; j++)	{
+			mat3[i][j] = 0;
+			for (int k = 0; k < dimY1; k++)
+				mat3[i][j] = mat3[i][j] + mat1[i][k] * mat2[k][j];
+		}
+	}
+
+	for (int i = 0; i < dimX1; i++) {
+		for (int j = 0; j < dimY1; j++) {
+			cout << mat3[i][j] << " ";
+		}
+		cout << endl;
+	}
+	duration = (clock() - start) / (double)CLOCKS_PER_SEC;
+
+
+	cout << "\nTime of Iterative method: " << duration << "sec." << endl;
+
+	system("PAUSE");
+	return 0;
+
+
+
+
+
+
+
+
+
+
+
+
+}
