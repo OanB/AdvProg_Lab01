@@ -1,0 +1,22 @@
+Introduction:
+
+What I did here is to apply the method of Strassen’s Algorithm in C++ language to and then comparing it with iterative method to gain the time complexity and the idea that with algorithm works faster.
+
+Approach:
+
+•	We used two 2x2 matrices here
+•	We allocated random values in those matrices
+•	Then we displayed those matrices
+•	Then we started the time counter
+•	We applied the method of Strassen’s algorithm here
+•	We gained the Resultant matrix.
+•	We stopped the time
+•	We Displayed the matrix and showed the time
+•	We restarted the time
+•	We Applied the method of iterative multiplication
+•	We stopped the time
+•	We displayed the time of the iterative method.
+
+Analysis:
+
+We gained the result in such a way which showed that the time of iterative method is more than Strassen’s Algorithm.
